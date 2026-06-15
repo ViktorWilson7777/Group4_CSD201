@@ -1,0 +1,23 @@
+# Maven build outputs
+target/
+*.war
+*.ear
+*.jar
+
+# IDE files
+.idea/
+*.iml
+.nbproject/
+nbproject/
+nb-configuration.xml
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# User specific/benchmark exports
+benchmark-results/*.csv
+!benchmark-results/README.md
