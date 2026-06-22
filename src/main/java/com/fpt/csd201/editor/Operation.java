@@ -36,7 +36,7 @@ public abstract class Operation implements Serializable {
         this.position = position;
         this.oldText = oldText != null ? oldText : "";
         this.newText = newText != null ? newText : "";
-        this.timestamp = System.currentTimeMillis();
+        this.timestamp = System.currentTimeMillis(); // nhìn vào cái đồng hồ trên máy tính/server đang chạy code Java, lưu thời gian bằng con số mili-giây khổng lồ (VD: 1718428859000)
         this.groupId = groupId;
     }
 
@@ -51,14 +51,14 @@ public abstract class Operation implements Serializable {
      * Each Java char ≈ 2 bytes (UTF-16) + 64 bytes metadata overhead.
      */
     public int estimatedBytes() {
-        int textBytes = (oldText.length() + newText.length()) * 2;
-        int metadataBytes = 64;
+        int textBytes = (oldText.length() + newText.length()) * 2; //mỗi 1 ký tự (char) trong Java luôn tốn đúng 2 bytes 
+        int metadataBytes = 64; //"ước chừng" cho các thành phần ẩn (Object Header, con trỏ, padding...) do máy ảo JVM bí mật nhét vào
         return textBytes + metadataBytes;
     }
 
     /** Human-readable description for the history viewer. */
     public String getDescription() {
-        String time = String.format("%tT", timestamp);
+        String time = String.format("%tT", timestamp); //ép thành định dạng giờ chuẩn quốc tế HH:MM:SS
         switch (type) {
             case "INSERT":
                 return String.format("[%s] INSERT \"%s\" at %d", time, truncate(newText, 30), position);
@@ -68,7 +68,7 @@ public abstract class Operation implements Serializable {
                 return String.format("[%s] REPLACE \"%s\" -> \"%s\" at %d",
                         time, truncate(oldText, 20), truncate(newText, 20), position);
             default:
-                return String.format("[%s] %s at %d", time, type, position);
+                return String.format("[%s] %s at %d", time, type, position);//trường hợp dự phòng loại lệnh lạ
         }
     }
 

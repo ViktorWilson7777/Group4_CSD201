@@ -456,7 +456,7 @@ editorTextarea.addEventListener('input', () => {
     if (isUpdatingTextarea) return;
 
     const newContent = editorTextarea.value;
-    const change = detectChange(previousContent, newContent);
+    const change = detectChange(previousContent, newContent);//Dù văn bản 1000 trang, phép so sánh cũng chỉ mất chưa tới 1 phần nghìn giây (0.001s) để hoàn thành
     if (!change) return;
 
     previousContent = newContent;
